@@ -1,0 +1,425 @@
+/* -----------------------------------------------------------------------
+   BEVETE PIÙ LATTE — style.css
+   ----------------------------------------------------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* -----------------------------------------------------------------------
+   FONT FACE
+   ----------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'NoiGrotesk';
+  src: url('fonts/NoiGrotesk-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FontPopulista';
+  src: url('fonts/FontPopulista-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FontPopulistaStorto';
+  src: url('fonts/FontPopulista-Storto.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avara';
+  src: url('fonts/Avara-BoldItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* -----------------------------------------------------------------------
+   VARIABILI
+   ----------------------------------------------------------------------- */
+
+:root {
+  --color-bg:     #F4F3DD;
+  --color-text:   #0B38B5;
+  --color-border: #0B38B5;
+  --color-red: #FC3533;
+  --color-pink: #E3C1D2;
+  --color-green: #C2DB74;
+
+  --font-header:  'NoiGrotesk', sans-serif;
+  --font-body:    'FontPopulista', sans-serif;
+  --font-body-storto:    'FontPopulistaStorto', sans-serif;
+  --font-avara:   'Avara', sans-serif;
+
+  --font-size-base:   1.10rem; 
+  --font-size-h1:     3.33rem; /* ex 40pt */
+  --font-size-h2:     1.66rem; /* ex 20pt */
+  --font-size-h3:     2.33rem; /* proporzionale */
+  --font-size-p:      1.10rem; 
+
+  --header-padding: 1rem;
+  --body-padding:   1rem;
+  --vw: 0.5vw;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --font-size-base:   1.1rem;   /* ex ~12pt */
+    --font-size-h1:     6rem;    /* ex ~72pt */
+    --font-size-h2:     3rem;    /* ex ~36pt  */
+    --font-size-h3:     3.5rem;  /* ex ~42pt  */
+    --font-size-p:      1.5rem;  /* ex ~18pt  */
+  }
+}
+
+/* -----------------------------------------------------------------------
+   BASE
+   ----------------------------------------------------------------------- */
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--font-size-base);
+  line-height: 1.4;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -----------------------------------------------------------------------
+   HEADER — 4 colonne
+   ----------------------------------------------------------------------- */
+
+.header-left,
+.header-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* CAMBIATO: da 'auto' a '1fr 1fr' per due colonne uguali */
+  gap: 2rem;  /* AGGIUNTO: spazio tra le colonne */
+  width: 100%;
+  padding: var(--header-padding);
+  background-color: transparent;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.header-col {
+  padding: 0 2em 0 0em;
+}
+
+/* Stile paragrafo header */
+.h_header {
+  font-family: var(--font-header);
+  font-size: var(--font-size-base);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+}
+
+/* -----------------------------------------------------------------------
+   BODY 
+   ----------------------------------------------------------------------- */
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  flex-grow: 1;
+  height: 100vh;
+  position: relative;
+  z-index: 10;
+}
+
+.col-left,
+.col-right {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  background: transparent;
+  display: block;
+  position: relative;
+  z-index: 1;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.col-left {
+  background: linear-gradient(to bottom, transparent 0%, transparent calc(28.8 * var(--vw) - 1px), var(--color-pink) calc(28.8 * var(--vw)), var(--color-pink) 100%);
+  background-attachment: local;
+}
+
+.col-right {
+  background: linear-gradient(to bottom, transparent 0%, transparent calc(28.8 * var(--vw) - 1px), var(--color-green) calc(28.8 * var(--vw)), var(--color-green) 100%);
+  background-attachment: local;
+}
+
+.col-left::-webkit-scrollbar,
+.col-right::-webkit-scrollbar {
+  display: none;
+}
+
+/* background */
+
+/* 1. Carton shape (top part) */
+.col-left::before,
+.col-right::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(28.8 * var(--vw) + 2px);
+  z-index: 0;
+  clip-path: polygon(
+    61.4% calc(13.9 * var(--vw)),
+    61.4% calc(9.4 * var(--vw)),
+    30.7% 0px,
+    30.7% calc(11.5 * var(--vw)),
+    0% calc(28.8 * var(--vw)),
+    0% 100%,
+    100% 100%,
+    100% calc(28.8 * var(--vw))
+  );
+}
+
+.col-left::before { background-color: var(--color-pink); }
+.col-right::before { background-color: var(--color-green); }
+
+/* Skew 2D — colonna destra */
+.col-right-inner {
+  position: relative;
+  z-index: 1;
+  transform: skew(0deg, -16deg);
+  transform-origin: top right;
+  width: 100%;
+  box-sizing: border-box;
+  padding: calc(28.8 * var(--vw) - 6.5rem) var(--body-padding) calc(var(--body-padding) + 15vw) var(--body-padding);
+}
+
+/* Skew 2D — colonna sinistra */
+.col-left-inner {
+  position: relative;
+  z-index: 1;
+  transform: skew(0deg, 16deg);
+  transform-origin: top left;
+  width: 100%;
+  box-sizing: border-box;
+  padding: calc(28.8 * var(--vw) - 4rem) var(--body-padding) calc(var(--body-padding) + 15vw) var(--body-padding);
+}
+
+/* -----------------------------------------------------------------------
+   TIPOGRAFIA CORPO
+   ----------------------------------------------------------------------- */
+
+h1 {
+  font-family: var(--font-body-storto);
+  font-size: var(--font-size-h1);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-text);
+  margin-bottom: 0.15rem;
+}
+
+h2 {
+  font-family: var(--font-body);
+  font-size: var(--font-size-h2);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.015em;
+}
+
+.col-left-inner h2 {
+  white-space: nowrap;
+}
+
+h3 {
+  font-family: var(--font-avara);
+  font-size: var(--font-size-h3);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin: 0.65rem 0;
+  letter-spacing: -0.015em;
+}
+
+.divider-line {
+  border: none;
+  border-top: 20px solid var(--color-red);
+  margin: 0.65rem 0;
+}
+
+.p_programma {
+  font-family: var(--font-header);
+  font-size: var(--font-size-base);
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.p_descrizione {
+  font-family: var(--font-header);
+  font-size: var(--font-size-base);
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.p_colophon {
+  font-family: var(--font-header);
+  font-size: var(--font-size-p);
+  line-height: 1.1;
+  color: var(--color-text);
+  margin-top: 2rem;
+}
+
+.p_link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.p_link::after {
+  content: "";
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  margin-left: 0.3em;
+  background-color: currentColor;
+  -webkit-mask-image: url('fiore.svg');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url('fiore.svg');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  vertical-align: middle;
+  transform: translateY(-0.05em);
+}
+
+.p_link:hover {
+  opacity: 0.6;
+}
+
+/* Box per la Call */
+.call-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2pt dashed var(--color-text);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  gap: 1.5rem;
+}
+
+.call-box-text {
+  margin: 0;
+  flex: 1;
+}
+
+.call-box .p_link::after {
+  display: none;
+}
+
+.call-box-icon-svg {
+  flex-shrink: 0;
+  width: 6rem;
+  height: 6rem;
+  color: var(--color-text); /* Eredita il colore blu */
+}
+
+/* Due mini-colonne dentro p_descrizione: sinistra e destra */
+.p_descrizione-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-header);
+  font-size: var(--font-size-base);
+  line-height: 1.1;
+  color: var(--color-text);
+  margin-bottom: 0.2rem;
+}
+
+.p_descrizione-split .col-sx { text-align: left; }
+.p_descrizione-split .col-dx { text-align: right; }
+
+/* FontPopulista — sempre maiuscolo */
+.font-populista,
+h1, h2 {
+  text-transform: uppercase;
+}
+
+/* -----------------------------------------------------------------------
+   MEDIA QUERIES 
+   ----------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  :root {
+    --vw: 1vw;
+  }
+
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  html, body {
+    background-image: none;
+  }
+
+  .header-left {
+    row-gap: 1.5rem;
+  }
+
+  .header-right {
+    display: none;
+  }
+
+  main {
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  main::-webkit-scrollbar {
+    display: none;
+  }
+
+  .col-left,
+  .col-right {
+    position: relative;
+    height: auto;
+    min-height: 100%;
+    overflow-y: visible;
+    z-index: 1;
+  }
+
+  /* no skew su mobile */
+  .col-left-inner,
+  .col-right-inner {
+    transform: none;
+  }
+  
+  .col-left-inner,
+  .col-right-inner {
+    padding: calc(28.8 * var(--vw) - 4rem) var(--body-padding) 2rem var(--body-padding);
+    position: relative;
+    z-index: 2;
+  }
+}
+
