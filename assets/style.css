@@ -70,7 +70,7 @@
   --font-size-h3:     2.33rem; 
   --font-size-h4:     1.33rem;  
   --font-size-descr:  1.3rem; 
-  --font-size-p:      1.12rem; 
+  --font-size-p:      1.3rem; 
   --font-size-colophon: 0.85rem;
 
   --header-padding: 1rem;
@@ -203,7 +203,7 @@ main {
   transform-origin: top right;
   width: 100%;
   box-sizing: border-box;
-  padding: calc(28.8 * var(--vw) - 9.5rem) var(--body-padding) calc(var(--body-padding) + 15vw) var(--body-padding);
+  padding: calc(28.8 * var(--vw) - 7.5rem) var(--body-padding) calc(var(--body-padding) + 15vw) var(--body-padding);
 }
 
 /* Skew 2D — colonna sinistra */
@@ -357,7 +357,7 @@ h4 {
 }
 
 .colophon-box {
-  margin-top: 8rem;
+  margin-top: 12rem;
 }
 
 /* -----------------------------------------------------------------------
@@ -460,7 +460,7 @@ h1, h2, h4 {
     --font-size-h3:     3.5rem;
     --font-size-h4:     3rem;
     --font-size-descr:  1.3rem;
-    --font-size-p:      1.12rem;
+    --font-size-p:      1.3rem;
     --font-size-colophon: 0.85rem;
   }
 }
