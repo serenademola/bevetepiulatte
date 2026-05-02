@@ -68,27 +68,14 @@
   --font-size-h1:     3.33rem; 
   --font-size-h2:     1.66rem; 
   --font-size-h3:     2.33rem; 
-  --font-size-h4:     1.3rem; 
+  --font-size-h4:     1.33rem;  
+  --font-size-descr:  1.3rem; 
   --font-size-p:      1.12rem; 
-  --font-size-colophon:      0.85rem;
-
+  --font-size-colophon: 0.85rem;
 
   --header-padding: 1rem;
   --body-padding:   1rem;
   --vw: 0.5vw;
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --font-size-base:   1.1rem;  
-    --font-size-h1:     6rem;    
-    --font-size-h2:     3rem;    
-    --font-size-h3:     3.5rem;  
-    --font-size-h4:     1.3rem; 
-    --font-size-p:      1.12rem;  
-    --font-size-colophon:      0.85rem;
-
-  }
 }
 
 /* -----------------------------------------------------------------------
@@ -115,8 +102,8 @@ html, body {
 .header-left,
 .header-right {
   display: grid;
-  grid-template-columns: 1fr 1fr;  /* CAMBIATO: da 'auto' a '1fr 1fr' per due colonne uguali */
-  gap: 2rem;  /* AGGIUNTO: spazio tra le colonne */
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   width: 100%;
   padding: var(--header-padding);
   background-color: transparent;
@@ -130,7 +117,6 @@ html, body {
   padding: 0 2em 0 0em;
 }
 
-/* Stile paragrafo header */
 .h_header {
   font-family: var(--font-header);
   font-size: var(--font-size-base);
@@ -259,12 +245,6 @@ h2 br.a-capo-mobile {
   display: none;
 }
 
-@media (min-width: 768px) and (max-width: 1600px) {
-  h2 br.a-capo-mobile {
-    display: inline;
-  }
-}
-
 h3 {
   font-family: var(--font-avara);
   font-size: var(--font-size-h3);
@@ -273,6 +253,14 @@ h3 {
   color: var(--color-text);
   margin: 0.65rem 0;
   letter-spacing: -0.015em;
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-size: var(--font-size-h4);
+  line-height: 0.9;
+  color: var(--color-text);
+  margin: 0.65rem 0;
 }
 
 .divider-line {
@@ -293,10 +281,6 @@ h3 {
   font-size: var(--font-size-p);
   line-height: 1.2;
   color: var(--color-text);
-  /*
-  text-align: justify;       
-  text-align-last: left;      
-  */
 }
 
 .p_colophon {
@@ -337,7 +321,10 @@ h3 {
   opacity: 0.6;
 }
 
-/* BOX TRATTEGGIATA */
+/* -----------------------------------------------------------------------
+   BOX
+   ----------------------------------------------------------------------- */
+
 .call-box {
   display: flex;
   align-items: center;
@@ -361,37 +348,50 @@ h3 {
   flex-shrink: 0;
   width: 6rem;
   height: 6rem;
-  color: var(--color-text); 
+  color: var(--color-text);
+  transition: transform 1s ease;
 }
+
+.call-box-icon-svg:hover {
+  transform: rotate(180deg);
+}
+
+.colophon-box {
+  margin-top: 8rem;
+}
+
+/* -----------------------------------------------------------------------
+   COLOPHON + LOGHI
+   ----------------------------------------------------------------------- */
 
 .colophon-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.25rem 1rem;
-  align-items: start; /* ogni cella parte dall'alto */
+  align-items: start;
 }
 
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .colophon-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+.colophon-grid img {
+  height: 2.8rem;
+  width: auto;
+  margin-top: 0.5rem;
 }
 
+img.logo-comune     { height: 3.5rem; }
+img.logo-extragarbo { height: 2rem; }
+img.logo-roi        { height: 3rem; }
+img.logo-camposaz   { height: 2.1rem; }
 
-@media (max-width: 768px) {
-  .colophon-grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* -----------------------------------------------------------------------
+   DESCRIZIONE
+   ----------------------------------------------------------------------- */
 
-/* Due colonne dentro p_descrizione */
 .p_descrizione-split {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   font-family: var(--font-header);
-  font-size: var(--font-size-h4);
+  font-size: var(--font-size-descr);
   line-height: 1.1;
   color: var(--color-text);
   margin-bottom: 0.2rem;
@@ -400,9 +400,12 @@ h3 {
 .p_descrizione-split .col-sx { text-align: left; }
 .p_descrizione-split .col-dx { text-align: right; }
 
-/* altre specifiche x il testo */
+/* -----------------------------------------------------------------------
+   ALTRE SPECIFICHE
+   ----------------------------------------------------------------------- */
+
 .font-populista,
-h1, h2 {
+h1, h2, h4 {
   text-transform: uppercase;
 }
 
@@ -417,33 +420,53 @@ h1, h2 {
   50%       { opacity: 0; }
 }
 
-/* Cerchio lampeggiante*/
 .col-dx.live::before {
   content: "";
   display: inline-block;
   width: 0.55em;
   height: 0.55em;
   background-color: var(--color-red);
-  border-radius: 50%; 
+  border-radius: 50%;
   margin-right: 0.4em;
   vertical-align: middle;
-  animation: lampeggia 1.2s ease-in-out infinite; 
-}
-
-
-
-/*altro */
-/* rotazione fiore al passaggio del mouse */
-.call-box-icon-svg {
-  transition: transform 1s ease;
-}
-
-.call-box-icon-svg:hover {
-  transform: rotate(180deg); 
+  animation: lampeggia 1.2s ease-in-out infinite;
 }
 
 /* -----------------------------------------------------------------------
-   MEDIA QUERIES 
+   MEDIA QUERIES — schermi medi 
+   ----------------------------------------------------------------------- */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .colophon-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  h2 br.a-capo-mobile {
+    display: inline;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   MEDIA QUERIES — desktop grande 
+   ----------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  :root {
+    --font-size-base:   1.1rem;
+    --font-size-h1:     6rem;
+    --font-size-h2:     3rem;
+    --font-size-h3:     3.5rem;
+    --font-size-h4:     3rem;
+    --font-size-descr:  1.3rem;
+    --font-size-p:      1.12rem;
+    --font-size-colophon: 0.85rem;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   MEDIA QUERIES — mobile
    ----------------------------------------------------------------------- */
 
 @media (max-width: 768px) {
@@ -475,7 +498,7 @@ h1, h2 {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  
+
   main::-webkit-scrollbar {
     display: none;
   }
@@ -493,13 +516,25 @@ h1, h2 {
   .col-left-inner,
   .col-right-inner {
     transform: none;
-  }
-  
-  .col-left-inner,
-  .col-right-inner {
     padding: calc(28.8 * var(--vw) - 4rem) var(--body-padding) 2rem var(--body-padding);
     position: relative;
     z-index: 2;
   }
-}
 
+  .call-box-icon-svg {
+    display: none;
+  }
+
+  .colophon-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .colophon-grid img {
+    height: 2rem;
+  }
+
+  img.logo-comune     { height: 3rem; }
+  img.logo-extragarbo { height: 1.5rem; }
+  img.logo-roi        { height: 3rem; }
+  img.logo-camposaz   { height: 1.5rem; }
+}
