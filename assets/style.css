@@ -20,6 +20,13 @@
 }
 
 @font-face {
+  font-family: 'NoiGrotesk';
+  src: url('fonts/NoiGrotesk-Semibold.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'FontPopulista';
   src: url('fonts/FontPopulista-Regular.otf') format('opentype');
   font-weight: 400;
@@ -58,10 +65,13 @@
   --font-avara:   'Avara', sans-serif;
 
   --font-size-base:   1.10rem; 
-  --font-size-h1:     3.33rem; /* ex 40pt */
-  --font-size-h2:     1.66rem; /* ex 20pt */
-  --font-size-h3:     2.33rem; /* proporzionale */
-  --font-size-p:      1.10rem; 
+  --font-size-h1:     3.33rem; 
+  --font-size-h2:     1.66rem; 
+  --font-size-h3:     2.33rem; 
+  --font-size-h4:     1.3rem; 
+  --font-size-p:      1.12rem; 
+  --font-size-colophon:      0.85rem;
+
 
   --header-padding: 1rem;
   --body-padding:   1rem;
@@ -70,11 +80,14 @@
 
 @media (min-width: 1024px) {
   :root {
-    --font-size-base:   1.1rem;   /* ex ~12pt */
-    --font-size-h1:     6rem;    /* ex ~72pt */
-    --font-size-h2:     3rem;    /* ex ~36pt  */
-    --font-size-h3:     3.5rem;  /* ex ~42pt  */
-    --font-size-p:      1.5rem;  /* ex ~18pt  */
+    --font-size-base:   1.1rem;  
+    --font-size-h1:     6rem;    
+    --font-size-h2:     3rem;    
+    --font-size-h3:     3.5rem;  
+    --font-size-h4:     1.3rem; 
+    --font-size-p:      1.12rem;  
+    --font-size-colophon:      0.85rem;
+
   }
 }
 
@@ -204,7 +217,7 @@ main {
   transform-origin: top right;
   width: 100%;
   box-sizing: border-box;
-  padding: calc(28.8 * var(--vw) - 6.5rem) var(--body-padding) calc(var(--body-padding) + 15vw) var(--body-padding);
+  padding: calc(28.8 * var(--vw) - 9.5rem) var(--body-padding) calc(var(--body-padding) + 15vw) var(--body-padding);
 }
 
 /* Skew 2D — colonna sinistra */
@@ -215,7 +228,7 @@ main {
   transform-origin: top left;
   width: 100%;
   box-sizing: border-box;
-  padding: calc(28.8 * var(--vw) - 4rem) var(--body-padding) calc(var(--body-padding) + 15vw) var(--body-padding);
+  padding: calc(28.8 * var(--vw) - 7.5rem) var(--body-padding) calc(var(--body-padding) + 15vw) var(--body-padding);
 }
 
 /* -----------------------------------------------------------------------
@@ -242,8 +255,14 @@ h2 {
   letter-spacing: -0.015em;
 }
 
-.col-left-inner h2 {
-  white-space: nowrap;
+h2 br.a-capo-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1600px) {
+  h2 br.a-capo-mobile {
+    display: inline;
+  }
 }
 
 h3 {
@@ -258,7 +277,7 @@ h3 {
 
 .divider-line {
   border: none;
-  border-top: 20px solid var(--color-red);
+  border-top: 20px solid var(--color-text);
   margin: 0.65rem 0;
 }
 
@@ -271,14 +290,18 @@ h3 {
 
 .p_descrizione {
   font-family: var(--font-header);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-p);
   line-height: 1.2;
   color: var(--color-text);
+  /*
+  text-align: justify;       
+  text-align-last: left;      
+  */
 }
 
 .p_colophon {
   font-family: var(--font-header);
-  font-size: var(--font-size-p);
+  font-size: var(--font-size-colophon);
   line-height: 1.1;
   color: var(--color-text);
   margin-top: 2rem;
@@ -314,13 +337,13 @@ h3 {
   opacity: 0.6;
 }
 
-/* Box per la Call */
+/* BOX TRATTEGGIATA */
 .call-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border: 2pt dashed var(--color-text);
-  padding: 1.5rem;
+  padding: 0.8rem;
   margin: 2rem 0;
   gap: 1.5rem;
 }
@@ -338,16 +361,37 @@ h3 {
   flex-shrink: 0;
   width: 6rem;
   height: 6rem;
-  color: var(--color-text); /* Eredita il colore blu */
+  color: var(--color-text); 
 }
 
-/* Due mini-colonne dentro p_descrizione: sinistra e destra */
+.colophon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.25rem 1rem;
+  align-items: start; /* ogni cella parte dall'alto */
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .colophon-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .colophon-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Due colonne dentro p_descrizione */
 .p_descrizione-split {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   font-family: var(--font-header);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-h4);
   line-height: 1.1;
   color: var(--color-text);
   margin-bottom: 0.2rem;
@@ -356,10 +400,46 @@ h3 {
 .p_descrizione-split .col-sx { text-align: left; }
 .p_descrizione-split .col-dx { text-align: right; }
 
-/* FontPopulista — sempre maiuscolo */
+/* altre specifiche x il testo */
 .font-populista,
 h1, h2 {
   text-transform: uppercase;
+}
+
+.semibold {
+  font-family: 'NoiGrotesk', sans-serif;
+  font-weight: 500;
+}
+
+/* lampeggio */
+@keyframes lampeggia {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Cerchio lampeggiante*/
+.col-dx.live::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  background-color: var(--color-red);
+  border-radius: 50%; 
+  margin-right: 0.4em;
+  vertical-align: middle;
+  animation: lampeggia 1.2s ease-in-out infinite; 
+}
+
+
+
+/*altro */
+/* rotazione fiore al passaggio del mouse */
+.call-box-icon-svg {
+  transition: transform 1s ease;
+}
+
+.call-box-icon-svg:hover {
+  transform: rotate(180deg); 
 }
 
 /* -----------------------------------------------------------------------
