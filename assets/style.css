@@ -463,13 +463,13 @@ h1, h2, h4 {
 /* -----------------------------------------------------------------------
    MEDIA QUERIES — schermi medi 
    ----------------------------------------------------------------------- */
-/*
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .colophon-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
-*/
+
 
 @media (min-width: 768px) {
   h2 br.a-capo-mobile {
