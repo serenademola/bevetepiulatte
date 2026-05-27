@@ -266,6 +266,7 @@ h4 {
   font-family: var(--font-body);
   font-size: var(--font-size-h4);
   line-height: 0.9;
+  font-weight: 400;
   color: var(--color-text);
   margin: 0.65rem 0;
 }
